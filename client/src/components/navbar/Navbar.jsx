@@ -1,22 +1,22 @@
 import './navbar.scss';
-import {
-  Search,
-  Notifications,
-  ArrowDropDown,
-  ContactSupportTwoTone,
-} from '@material-ui/icons';
+import { Search, Notifications, ArrowDropDown } from '@material-ui/icons';
 import { useState } from 'react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 0) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-  });
+  window.onscroll = () => {
+    setIsScrolled(window.pageYOffset === 0 ? false : true);
+    return () => (window.onscroll = null);
+  };
+
+  // window.addEventListener('scroll', () => {
+  //   if (window.pageYOffset > 0) {
+  //     setIsScrolled(true);
+  //   } else {
+  //     setIsScrolled(false);
+  //   }
+  // });
 
   return (
     <div className={isScrolled ? 'navbar active' : 'navbar'}>
