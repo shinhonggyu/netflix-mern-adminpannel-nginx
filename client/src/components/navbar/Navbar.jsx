@@ -1,6 +1,7 @@
 import './navbar.scss';
 import { Search, Notifications, ArrowDropDown } from '@material-ui/icons';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,9 +27,15 @@ const Navbar = () => {
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
             alt="netflix logo"
           />
-          <span className="active">HomePage</span>
-          <span className="active">Series</span>
-          <span className="active">Movies</span>
+          <Link to="/" className="link">
+            <span className="active">HomePage</span>
+          </Link>
+          <Link to="/series" className="link">
+            <span className="active">Series</span>
+          </Link>
+          <Link to="/movies" className="link">
+            <span className="active">Movies</span>
+          </Link>
           <span>New and Popular</span>
           <span>My List</span>
         </div>
