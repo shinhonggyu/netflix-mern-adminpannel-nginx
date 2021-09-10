@@ -1,46 +1,56 @@
 import './productList.css';
 import { DataGrid } from '@material-ui/data-grid';
 import { DeleteOutline } from '@material-ui/icons';
-import { productRows } from '../../dummyData';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { MovieContext } from '../../context/movieContext/MovieContext';
+import { getMovies } from '../../context/movieContext/apiCalls';
 
 const ProductList = () => {
-  const [data, setData] = useState(productRows);
+  const { movies, dispatch } = useContext(MovieContext);
+
+  useEffect(() => {
+    getMovies(dispatch);
+  }, [dispatch]);
 
   const handleDelete = (productId) => {
-    setData(data.filter((item) => item.id !== productId));
+    // setData(data.filter((item) => item.id !== productId));
   };
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: '_id', headerName: 'ID', width: 90 },
     {
-      field: 'product',
-      headerName: 'Product',
+      field: 'movie',
+      headerName: 'Movie',
       width: 150,
       renderCell: (params) => {
         return (
           <div className="productListItem">
             <img className="productListImg" src={params.row.img} alt="" />
-            {params.row.name}
+            {params.row.title}
           </div>
         );
       },
     },
     {
-      field: 'stock',
-      headerName: 'Stock',
+      field: 'genre',
+      headerName: 'Genre',
       width: 150,
     },
     {
-      field: 'status',
-      headerName: 'Status',
-      width: 130,
+      field: 'year',
+      headerName: 'Year',
+      width: 150,
     },
     {
-      field: 'price',
-      headerName: 'Price',
-      width: 200,
+      field: 'limit',
+      headerName: 'Limit',
+      width: 150,
+    },
+    {
+      field: 'isSeries',
+      headerName: 'IsSeries',
+      width: 150,
     },
     {
       field: 'action',
@@ -65,11 +75,12 @@ const ProductList = () => {
   return (
     <div className="productList">
       <DataGrid
-        rows={data}
+        rows={movies}
         columns={columns}
         pageSize={8}
         checkboxSelection
         disableSelectionOnClick
+        getRowId={(r) => r._id}
       />
     </div>
   );
