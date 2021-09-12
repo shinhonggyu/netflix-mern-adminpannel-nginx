@@ -1,6 +1,5 @@
 import './sidebar.css';
 import {
-  AttachMoney,
   ChatBubbleOutline,
   DynamicFeed,
   LineStyle,
@@ -11,6 +10,7 @@ import {
   Timeline,
   TrendingUp,
   WorkOutline,
+  List,
 } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 
@@ -52,10 +52,12 @@ const Sidebar = () => {
                 Movies
               </li>
             </Link>
-            <li className="sidebarListItem">
-              <AttachMoney className="sidebarIcon" />
-              Transactions
-            </li>
+            <Link to="/lists" className="link">
+              <li className="sidebarListItem active">
+                <List className="sidebarIcon" />
+                Lists
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">
