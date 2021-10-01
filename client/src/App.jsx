@@ -9,9 +9,11 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from './context/authContext/AuthContext';
 
 const App = () => {
-  const user = true;
+  const { user } = useContext(AuthContext);
 
   return (
     <Router>
@@ -20,7 +22,7 @@ const App = () => {
           {user ? <Home /> : <Redirect to="/register" />}
         </Route>
         <Route path="/register">{!user ? <Register /> : <Home />}</Route>
-        <Route path="/login">{!user ? <Login /> : <Home />}</Route>
+        <Route path="/login">{!user ? <Login /> : <Redirect to="/" />}</Route>
         {user && (
           <>
             <Route path="/movies">

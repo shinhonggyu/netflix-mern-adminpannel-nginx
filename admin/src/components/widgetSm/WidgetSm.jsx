@@ -12,7 +12,7 @@ const WidgetSm = () => {
         const res = await axios.get('/users?new=true', {
           headers: {
             token:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMzZjYTMwZDk3OWM4NmFmNTE4NTc3OCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYzMTAyNzU2NSwiZXhwIjoxNjMxNDU5NTY1fQ.Sf8ZfstDK8mucVP0z4j91bDozxsPLGCBc8ef1ucpFl0',
+              'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken,
           },
         });
         setNewUsers(res.data);

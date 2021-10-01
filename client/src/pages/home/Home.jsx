@@ -19,7 +19,8 @@ const Home = ({ type }) => {
           {
             headers: {
               token:
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMzZjYTMwZDk3OWM4NmFmNTE4NTc3OCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYzMTAyNzU2NSwiZXhwIjoxNjMxNDU5NTY1fQ.Sf8ZfstDK8mucVP0z4j91bDozxsPLGCBc8ef1ucpFl0',
+                'Bearer ' +
+                JSON.parse(localStorage.getItem('user')).accessToken,
             },
           }
         );
@@ -30,12 +31,12 @@ const Home = ({ type }) => {
     };
 
     getRandomLists();
-  }, [type]);
+  }, [type, genre]);
 
   return (
     <div className="home">
       <Navbar />
-      <Featured type={type} />
+      <Featured type={type} setGenre={setGenre} />
       {lists.map((list) => (
         <List list={list} key={list._id} />
       ))}
